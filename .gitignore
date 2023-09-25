@@ -7,6 +7,17 @@
 *.obj
 *.elf
 
+# code:blocks
+*.cbp
+*.layout
+
+# lex and yacc intermediate
+*.yy.c
+*.yy.h
+*.tab.c
+*.tab.h
+*.output
+
 # Linker output
 *.ilk
 *.map
