@@ -179,7 +179,7 @@ void symbol_list_print(void)
 void print_struct_symbol_list(struct symbol_table_entry * entry)
 {
     printf("    address: %08X\n", entry);
-    printf("         list: next: %08X, prev: %08X\n", entry->list.next, entry->list.prev);
+//    printf("         list: next: %08X, prev: %08X\n", entry->list.next, entry->list.prev);
     printf("address_symbol_list: next: %08X, prev: %08X\n", entry->address_symbol_list.next, entry->address_symbol_list.prev);
     printf("       length: %08X\n", entry->length);
     printf("       symbol: %s\n", entry->symbol);

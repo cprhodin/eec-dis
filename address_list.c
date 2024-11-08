@@ -80,8 +80,8 @@ struct address_table_entry * address_table_create(uint32_t const address)
 }
 
 
-void address_table_add_symbol(struct address_table_entry * const address_entry,
-                             struct symbol_table_entry * const symbol_entry)
+static void address_table_add_symbol(struct address_table_entry * const address_entry,
+                                     struct symbol_table_entry * const symbol_entry)
 {
     if (address_entry && symbol_entry)
     {

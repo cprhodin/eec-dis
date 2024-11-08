@@ -64,7 +64,7 @@ struct symbol_table_entry;
 
 void address_table_init(void);
 
-void address_table_add_symbol(struct address_table_entry * const address_entry, struct symbol_table_entry * const symbol_entry);
+//void address_table_add_symbol(struct address_table_entry * const address_entry, struct symbol_table_entry * const symbol_entry);
 struct address_table_entry * address_table_create(uint32_t const address);
 struct address_table_entry * address_table_create_symbol(uint32_t const address, char const * symbol);
 struct address_table_entry * address_table_create_code(uint32_t const address, char const * symbol);

@@ -78,7 +78,7 @@ $(DEPS_DIR) :
 	mkdir $(DEPS_DIR)
 
 $(C_OBJS) : $(OBJS_DIR)/%.o : %.c $(DEPS_DIR)/%.d
-	$(CC) -c -MMD -MF $(DEPS_DIR)/$*.d -o $@ $*.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -MMD -MF $(DEPS_DIR)/$*.d -o $@ $*.c
 
 $(C_SRC_DEPS) : $(DEPS_DIR)/%.d :
 

@@ -272,4 +272,4 @@
     INSTRUCTION_DEF( 0xfc, "clrvt", flds_intrinsic,  0 ),                                          \
     INSTRUCTION_DEF( 0xfd, NULL,    NULL,            TGT_INVALID ),                                \
     INSTRUCTION_DEF( 0xfe, NULL,    NULL,            TGT_INVALID ),                                \
-    INSTRUCTION_DEF( 0xff, "nop",   flds_intrinsic,  0 ),                                          \
+    INSTRUCTION_DEF( 0xff, "nop",   flds_intrinsic,  0 ),

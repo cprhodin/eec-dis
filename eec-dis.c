@@ -28,7 +28,7 @@
 //#define LABEL_COLUMN     0
 
 #define DUMP_COLUMN      ADDRESS_COLUMN   + 10
-#define LABEL_COLUMN     DUMP_COLUMN      + 25
+#define LABEL_COLUMN     DUMP_COLUMN      + 26
 #define MNEMONIC_COLUMN  LABEL_COLUMN     + 20
 #define PARAMETER_COLUMN MNEMONIC_COLUMN  + 16
 #define COMMENT_COLUMN   PARAMETER_COLUMN + 20
@@ -202,7 +202,7 @@ void set_byte_src_register_name(uint_t byte_register, char const * name)
 
     if (byte_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", byte_register);
         exit(1);
     }
 
@@ -219,7 +219,7 @@ void set_byte_dst_register_name(uint_t byte_register, char const * name)
 
     if (byte_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", byte_register);
         exit(1);
     }
 
@@ -236,7 +236,7 @@ void set_word_src_register_name(uint_t word_register, char const * name)
 
     if ((word_register > 255) || (word_register & 0x1))
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", word_register);
         exit(1);
     }
 
@@ -253,7 +253,7 @@ void set_word_dst_register_name(uint_t word_register, char const * name)
 
     if ((word_register > 255) || (word_register & 0x1))
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", word_register);
         exit(1);
     }
 
@@ -270,7 +270,7 @@ void set_long_src_register_name(uint_t long_register, char const * name)
 
     if ((long_register > 255) || (long_register & 0x3))
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", long_register);
         exit(1);
     }
 
@@ -287,7 +287,7 @@ void set_long_dst_register_name(uint_t long_register, char const * name)
 
     if ((long_register > 255) || (long_register & 0x3))
     {
-        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to set the name of an invalid register: %d\n", long_register);
         exit(1);
     }
 
@@ -302,7 +302,7 @@ char const * get_byte_src_register_name(uint_t byte_register)
 {
     if (byte_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", byte_register);
         exit(1);
     }
 
@@ -321,7 +321,7 @@ char const * get_byte_dst_register_name(uint_t byte_register)
 {
     if (byte_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", byte_register);
         exit(1);
     }
 
@@ -338,9 +338,9 @@ char const * get_byte_dst_register_name(uint_t byte_register)
 
 char const * get_word_src_register_name(uint_t word_register)
 {
-    if ((word_register > 255) || (word_register & 0x1))
+    if (word_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", word_register);
         exit(1);
     }
 
@@ -349,7 +349,7 @@ char const * get_word_src_register_name(uint_t word_register)
         return word_src_register_name[word_register >> 1];
     }
 
-    sprintf(tmp_reg, "R%d", word_register);
+    sprintf(tmp_reg, "R%d:%d", word_register & 0xFE, word_register & 0x01);
 
     return tmp_reg;
 }
@@ -357,9 +357,9 @@ char const * get_word_src_register_name(uint_t word_register)
 
 char const * get_word_dst_register_name(uint_t word_register)
 {
-    if ((word_register > 255) || (word_register & 0x1))
+    if (word_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", word_register);
         exit(1);
     }
 
@@ -368,7 +368,7 @@ char const * get_word_dst_register_name(uint_t word_register)
         return word_dst_register_name[word_register >> 1];
     }
 
-    sprintf(tmp_reg, "r%d", word_register);
+    sprintf(tmp_reg, "r%d:%d", word_register & 0xFE, word_register & 0x01);
 
     return tmp_reg;
 }
@@ -376,9 +376,9 @@ char const * get_word_dst_register_name(uint_t word_register)
 
 char const * get_long_src_register_name(uint_t long_register)
 {
-    if ((long_register > 255) || (long_register & 0x3))
+    if (long_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", long_register);
         exit(1);
     }
 
@@ -396,9 +396,9 @@ char const * get_long_src_register_name(uint_t long_register)
 
 char const * get_long_dst_register_name(uint_t long_register)
 {
-    if ((long_register > 255) || (long_register & 0x3))
+    if (long_register > 255)
     {
-        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register\n");
+        printf("\n\nFATAL ERROR: attempting to get the name of an invalid register: %d\n", long_register);
         exit(1);
     }
 
@@ -626,13 +626,14 @@ int main(int argc, char **argv)
 
     init_register_names();
 
-
     //
     // load ROM image file
     //
+    rom_start = 0x2000;
+
     if (arguments.romfile)
     {
-        size_t num_bytes;
+        long num_bytes;
 
         romfile = fopen(arguments.romfile, "r");
         if (!romfile)
@@ -641,7 +642,24 @@ int main(int argc, char **argv)
             exit(1);
         }
 
-        num_bytes = fread(&tgt_memory[8192], sizeof(uint8_t), 32768, romfile);
+        fseek(romfile, 0L, SEEK_END);
+        num_bytes = ftell(romfile);
+
+        fseek(romfile, 0L, SEEK_SET);
+
+        num_bytes = 32768;
+
+        rom_limit = num_bytes + rom_start;
+
+        if (rom_limit > 0x00100000)
+        {
+            rom_limit = 0x00100000;
+            num_bytes = rom_limit - rom_start;
+        }
+
+        tgt_memory = malloc(rom_limit);
+
+        num_bytes = fread(&tgt_memory[rom_start], sizeof(uint8_t), num_bytes, romfile);
         printf("Read %d bytes from ROM file: %s\n", num_bytes, arguments.romfile);
     }
 
@@ -654,6 +672,9 @@ int main(int argc, char **argv)
         {
             yyin = fopen(arguments.dscfile, "r");
         }
+
+        printf("yyparse %s\n", arguments.dscfile);
+
         yyparse();
     }
 
@@ -668,14 +689,12 @@ int main(int argc, char **argv)
     //
     // set the limits of the disassembled region
     //
-    rom_start = 0x2000;
     symbol_entry = find_symbol("ROM_START");
     if (symbol_entry && symbol_entry->address)
     {
         rom_start = symbol_entry->address->address;
     }
 
-    rom_limit = 0xa000;
     symbol_entry = find_symbol("ROM_LIMIT");
     if (symbol_entry && symbol_entry->address)
     {
@@ -1055,16 +1074,16 @@ int main(int argc, char **argv)
         //
         // print address
         //
-//        SET_DISPLAY_COLUMN(address_column);
-//        display_column += printf("%08x", address);
+        SET_DISPLAY_COLUMN(address_column);
+        display_column += printf("%08x", address);
 
         //
         // print hex bytes
         //
-//        SET_DISPLAY_COLUMN(dump_column);
+        SET_DISPLAY_COLUMN(dump_column);
         for (i = 0; i < instr->size; i++)
         {
-//            display_column += printf("%02x ", tgt_byteread(address++));
+            display_column += printf("%02x ", tgt_byteread(address));
             address++;
         }
 

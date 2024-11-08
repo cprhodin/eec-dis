@@ -25,7 +25,7 @@ extern void yyerror(char const * s);
 %union
 {
     uint32_t num;
-    char *    str;
+    char * str;
     struct symbol_table_entry * sym;
 }
 

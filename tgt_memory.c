@@ -5,9 +5,7 @@
 #include "project.h"
 #include "tgt_memory.h"
 
-// 64K memory space
-uint8_t tgt_memory[0x10000];
-
+uint8_t * tgt_memory;
 
 uint32_t tgt_byteread(uint32_t tgt_addr)
 {
